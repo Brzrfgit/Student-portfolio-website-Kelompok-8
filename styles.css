@@ -41,6 +41,11 @@ em { color: var(--lime-dark); font-style: normal; }
 .button:hover { transform: translateY(-3px); }
 .button-primary { color: var(--ink); background: var(--lime); }
 .text-link { color: var(--muted); font: 12px var(--mono); border-bottom: 1px solid #c5cbc4; padding-bottom: 5px; }
+.social-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 27px; }
+.social-button { display: inline-flex; align-items: center; gap: 9px; padding: 10px 13px; border: 1px solid var(--line); border-radius: 4px; color: var(--ink); font: 11px var(--mono); transition: border-color .2s, background .2s, transform .2s; }
+.social-button:hover { border-color: var(--ink); background: var(--white); transform: translateY(-2px); }
+.social-icon { display: grid; place-items: center; width: 20px; height: 20px; color: var(--paper); background: var(--ink); border-radius: 3px; font: 500 10px var(--mono); }
+.social-arrow { color: var(--lime-dark); margin-left: 8px; }
 .hero-aside { position: relative; min-height: 360px; display: flex; align-items: center; justify-content: center; }
 .profile-orbit { width: 290px; height: 290px; position: relative; }
 .orbit-ring { position: absolute; inset: 0; border: 1px solid #d1d9cf; border-radius: 50%; }
