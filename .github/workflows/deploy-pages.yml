@@ -1,4 +1,4 @@
-name: Deploy multiple branch websites
+name: Deploy portfolio websites
 
 on:
   workflow_dispatch:
@@ -7,6 +7,7 @@ on:
       - main
       - resume-bariza-rafi-leressae
       - dimas-profile
+      - resume-rasya
 
 permissions:
   contents: read
@@ -34,13 +35,18 @@ jobs:
           ref: dimas-profile
           path: dimas
 
-      - name: Prepare deployment folders
-        run: |
-          mkdir -p site/bariza
-          mkdir -p site/dimas
+      - name: Checkout Rasya website
+        uses: actions/checkout@v4
+        with:
+          ref: resume-rasya
+          path: rasya
 
+      - name: Prepare Pages files
+        run: |
+          mkdir -p site/bariza site/dimas site/rasya
           cp -r bariza/. site/bariza/
           cp -r dimas/. site/dimas/
+          cp -r rasya/. site/rasya/
 
           cat > site/index.html <<'EOF'
           <!doctype html>
@@ -48,13 +54,14 @@ jobs:
           <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Kelompok 8 Portfolio</title>
+            <title>Portfolio Kelompok 8</title>
           </head>
           <body>
             <h1>Portfolio Kelompok 8</h1>
             <ul>
               <li><a href="./bariza/">Portfolio Bariza</a></li>
               <li><a href="./dimas/">Portfolio Dimas</a></li>
+              <li><a href="./rasya/">Portfolio Rasya</a></li>
             </ul>
           </body>
           </html>
@@ -73,7 +80,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
